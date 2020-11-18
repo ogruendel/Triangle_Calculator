@@ -15,113 +15,129 @@ public class Triangle {
     public void calcState() {
 
         int nonNulls = 0;
-        if(alpha != null) nonNulls++;
-        if(beta != null) nonNulls++;
-        if(gamma != null) nonNulls++;
-        if(a != null) nonNulls++;
-        if(b != null) nonNulls++;
-        if(c != null) nonNulls++;
+        if (alpha != null) nonNulls++;
+        if (beta != null) nonNulls++;
+        if (gamma != null) nonNulls++;
+        if (a != null) nonNulls++;
+        if (b != null) nonNulls++;
+        if (c != null) nonNulls++;
 
-        if(nonNulls == 3) {
-            if(alpha != null && beta != null && gamma != null) {
+        if (nonNulls == 3) {
+            if (alpha != null && beta != null && gamma != null) {
                 throw new IllegalStateException("You cannot calculate a triangle with only 3 angles");
-            }else if(a != null && b != null && c != null){
+            } else if (a != null && b != null && c != null) {
 
-            }else if(alpha != null && a != null && b != null){
-                //sin(beta) = b / a => beta = arcsin(b / a)
-                beta = Math.asin(b / a) * toDeg;
-                gamma = 90 - beta;
-                //sin(gamma) = c / a => c = sin(gamma) * a
-                c = Math.sin(gamma * toRad) * a;
+                /*
+                 * For the cases, where there is a given angle and its opposing site, I am using the law of sines (https://en.wikipedia.org/wiki/Law_of_sines)
+                 * to calculate one missing angle, then I use the Interior angle sum of a triangle (https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle)
+                 * to calculate the missing angle, and then I use a rearranged form of the law of sines to calculate the missing site.
+                 *
+                 * For the cases, where there is not a given angle and its opposing site, I am using the law of cosines (https://en.wikipedia.org/wiki/Law_of_cosines)
+                 * to calculate the missing site, and then I use a rearranged form of the law of sines to calculate a missing angle.
+                 * After that its just the Interior angle sum of a triangle to get the remaining angle. */
 
-            }else if(alpha != null && a != null && c != null){
-                //cos(beta) = c / a => beta = arccos(c / a)
-                beta = Math.acos(c / a) * toDeg;
-                gamma = 90 - beta;
-                //cos(gamma) = b / a => b = cos(gamma) * a
-                b = Math.cos(gamma * toRad) * a;
+            } else if (alpha != null && a != null && b != null) {
+                beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
+                gamma = 180 - alpha - beta;
+                c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
 
-            }else if(alpha != null && b != null && c != null){
-                a = Math.sqrt(b * b + c * c);
-                //sin(beta) = b / a => beta = arcsin(b / a)
-                beta = Math.asin(b / a) * toDeg;
-                gamma = Math.asin(c / a) * toDeg;
+            } else if (alpha != null && a != null && c != null) {
+                gamma = Math.asin((c * Math.sin(alpha * toRad) / a)) * toDeg;
+                beta = 180 - alpha - gamma;
+                b = (a * Math.sin(beta * toRad) / Math.sin(alpha * toRad));
 
-            }else if(beta != null && a != null && b != null){
-                //sin(alpha) = a / b => alpha = arcsin(a / b)
-                alpha = Math.asin(a / b) * toDeg;
-                //cos(alpha) = c / b => c = cos(alpha) * b
-                c = Math.cos(alpha * toRad) * b;
-                //sin(gamma) = c / b => gamma = arcsin(c / b)
-                gamma = Math.asin(c / b) * toDeg;
-
-            }else if(beta != null && a != null && c != null){
-                b = Math.sqrt(a * a + c * c);
-                //sin(gamma) = c / b => gamma = arcsin(c / b)
-                gamma = Math.asin(c / b) * toDeg;
-                alpha = Math.asin(a / b) * toDeg;
-
-            }else if(beta != null && b != null && c != null){
-                //cos(alpha) = c / b => alpha = arccos(c / b)
-                alpha = Math.acos(c / b) * toDeg;
-                //sin(alpha) = a / b => a = sin(alpha) * b
-                a = Math.sin(alpha * toRad) * b;
-                //sin(gamma) = c / b => gamma = arcsin(c / b)
-                gamma = Math.asin(c / b) * toDeg;
-
-            }else if(gamma != null && a != null && b != null){
-                c = Math.sqrt(a * a + b * b);
-                alpha = Math.asin(a / c) * toDeg;
-                beta = Math.asin(b / c) * toDeg;
-
-            }else if(gamma != null && a != null && c != null){
-                alpha = Math.asin(a / c) * toDeg;
-                b = Math.cos(alpha * toRad) * c;
-                beta = Math.asin(b / c) * toDeg;
-
-            }else if(gamma != null && b != null && c != null){
-                alpha = Math.acos(b / c) * toDeg;
-                a = Math.sin(alpha * toRad) * c;
-                beta = Math.asin(b / c) * toDeg;
-
-            }else if(alpha != null && beta != null && a != null){
+            } else if (alpha != null && b != null && c != null) {
+                a = Math.sqrt(b * b + c * c - 2 * b * c * Math.cos(alpha * toRad));
+                beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
                 gamma = 180 - alpha - beta;
 
-            }else if(alpha != null && beta != null && b != null){
+            } else if (beta != null && a != null && b != null) {
+                alpha = Math.asin((a * Math.sin(beta * toRad) / b)) * toDeg;
+                gamma = 180 - alpha - beta;
+                c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
+
+            } else if (beta != null && a != null && c != null) {
+                b = Math.sqrt(a * a + c * c - 2 * a * c * Math.cos(beta * toRad));
+                alpha = Math.asin((a * Math.sin(beta * toRad) / b)) * toDeg;
                 gamma = 180 - alpha - beta;
 
-            }else if(alpha != null && beta != null && c != null){
+            } else if (beta != null && b != null && c != null) {
+                gamma = Math.asin((c * Math.sin(beta * toRad) / b)) * toDeg;
+                alpha = 180 - beta - gamma;
+                a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
+
+            } else if (gamma != null && a != null && b != null) {
+                c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(gamma * toRad));
+                alpha = Math.asin((a * Math.sin(gamma * toRad) / c)) * toDeg;
+                beta = 180 - alpha - gamma;
+
+            } else if (gamma != null && a != null && c != null) {
+                alpha = Math.asin((a * Math.sin(gamma * toRad) / c)) * toDeg;
+                beta = 180 - alpha - gamma;
+                b = (c * Math.sin(beta * toRad) / Math.sin(gamma * toRad));
+
+            } else if (gamma != null && b != null && c != null) {
+                beta = Math.asin((b * Math.sin(gamma * toRad) / c)) * toDeg;
+                alpha = 180 - beta - gamma;
+                a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
+
+            } else if (alpha != null && beta != null && a != null) {
                 gamma = 180 - alpha - beta;
+                b = (Math.sin(beta) * a) / Math.sin(alpha);
+                c = (Math.sin(gamma) * a) / Math.sin(alpha);
 
-            }else if(alpha != null && gamma != null && a != null){
+            } else if (alpha != null && beta != null && b != null) {
+                gamma = 180 - alpha - beta;
+                a = (Math.sin(alpha) * b) / Math.sin(beta);
+                c = (Math.sin(gamma) * b) / Math.sin(beta);
+
+            } else if (alpha != null && beta != null && c != null) {
+                gamma = 180 - alpha - beta;
+                a = (Math.sin(alpha) * c) / Math.sin(gamma);
+                b = (Math.sin(beta) * c) / Math.sin(gamma);
+
+            } else if (alpha != null && gamma != null && a != null) {
                 beta = 180 - alpha - gamma;
+                b = (Math.sin(beta) * a) / Math.sin(alpha);
+                c = (Math.sin(gamma) * a) / Math.sin(alpha);
 
-            }else if(alpha != null && gamma != null && b != null){
+            } else if (alpha != null && gamma != null && b != null) {
                 beta = 180 - alpha - gamma;
+                a = (Math.sin(alpha) / b) * Math.sin(beta);
+                c = (Math.sin(gamma) / b) * Math.sin(beta);
 
-            }else if(alpha != null && gamma != null && c != null){
+            } else if (alpha != null && gamma != null && c != null) {
                 beta = 180 - alpha - gamma;
+                a = (Math.sin(alpha) * c) / Math.sin(gamma);
+                b = (Math.sin(beta) * c) / Math.sin(gamma);
 
-            }else if(beta != null && gamma != null && a != null){
+            } else if (beta != null && gamma != null && a != null) {
                 alpha = 180 - beta - gamma;
+                b = (Math.sin(beta) * a) / Math.sin(alpha);
+                c = (Math.sin(gamma) * a) / Math.sin(alpha);
 
-            }else if(beta != null && gamma != null && b != null){
+            } else if (beta != null && gamma != null && b != null) {
                 alpha = 180 - beta - gamma;
+                a = (Math.sin(alpha) * b) / Math.sin(beta);
+                c = (Math.sin(gamma) * b) / Math.sin(beta);
 
-            }else if(beta != null && gamma != null && c != null){
+            } else if (beta != null && gamma != null && c != null) {
                 alpha = 180 - beta - gamma;
-            }else{
-                throw new IllegalStateException("This should not have happened :P");
+                a = (Math.sin(alpha) * c) / Math.sin(gamma);
+                b = (Math.sin(beta) * c) / Math.sin(gamma);
+
+            } else {
+                throw new IllegalStateException("This should not have happened");
             }
             isComplete = true;
         }
     }
 
 
-
     public double getAlpha() {
         return alpha;
     }
+
     public void setAlpha(double alpha) {
         this.alpha = alpha;
         calcState();
@@ -130,6 +146,7 @@ public class Triangle {
     public double getBeta() {
         return beta;
     }
+
     public void setBeta(double beta) {
         this.beta = beta;
         calcState();
@@ -138,12 +155,11 @@ public class Triangle {
     public double getGamma() {
         return gamma;
     }
+
     public void setGamma(double gamma) {
         this.gamma = gamma;
         calcState();
     }
-
-
 
     public double getA() {
         return a;
