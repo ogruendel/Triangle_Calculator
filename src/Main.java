@@ -5,9 +5,9 @@ public class Main {
     public static void main(String[] args) {
         Triangle t = new Triangle();
 
-        t.setAlpha(90);
-        t.setA(5);
-        t.setC(3);
+        t.setAlpha(36.87);
+        t.setGamma(90);
+        t.setB(4);
 
         t.calcState();
 

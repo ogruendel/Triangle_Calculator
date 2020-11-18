@@ -5,16 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
 
-    void pythagoras() {
-        Triangle t = new Triangle();
-        t.setGamma(90);
-        t.setA(3);
-        t.setC(5);
-
-        assertTrue(t.isComplete());
-        assertEquals(4, t.getB());
-        assertEquals(t.getAlpha() + t.getBeta(), 90);
-    }
     @org.junit.jupiter.api.Test
     void alphaAB(){
         Triangle t = new Triangle();
@@ -185,9 +175,9 @@ class TriangleTest {
     void alphaBetaA(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
-        t.setGamma(90);
+        t.setAlpha(36.87);
+        t.setBeta(53.13);
+        t.setA(3);
 
         assertTrue(t.isComplete());
 
@@ -203,9 +193,9 @@ class TriangleTest {
     void alphaBetaB(){
         Triangle t = new Triangle();
 
+        t.setAlpha(36.87);
+        t.setBeta(53.13);
         t.setB(4);
-        t.setC(5);
-        t.setGamma(90);
 
         assertTrue(t.isComplete());
 
@@ -221,9 +211,9 @@ class TriangleTest {
     void alphaBetaC(){
         Triangle t = new Triangle();
 
-        t.setB(4);
+        t.setAlpha(36.87);
+        t.setBeta(53.13);
         t.setC(5);
-        t.setGamma(90);
 
         assertTrue(t.isComplete());
 
@@ -239,9 +229,9 @@ class TriangleTest {
     void alphaGammaA(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setAlpha(36.87);
         t.setGamma(90);
+        t.setA(3);
 
         assertTrue(t.isComplete());
 
@@ -257,9 +247,9 @@ class TriangleTest {
     void alphaGammaB(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setAlpha(36.87);
         t.setGamma(90);
+        t.setB(4);
 
         assertTrue(t.isComplete());
 
@@ -275,9 +265,9 @@ class TriangleTest {
     void alphaGammaC(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setAlpha(36.87);
         t.setGamma(90);
+        t.setC(5);
 
         assertTrue(t.isComplete());
 
@@ -293,9 +283,9 @@ class TriangleTest {
     void betaGammaA(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setBeta(53.13);
         t.setGamma(90);
+        t.setA(3);
 
         assertTrue(t.isComplete());
 
@@ -311,9 +301,9 @@ class TriangleTest {
     void betaGammaB(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setBeta(53.13);
         t.setGamma(90);
+        t.setB(4);
 
         assertTrue(t.isComplete());
 
@@ -329,9 +319,9 @@ class TriangleTest {
     void betaGammaC(){
         Triangle t = new Triangle();
 
-        t.setB(4);
-        t.setC(5);
+        t.setBeta(53.13);
         t.setGamma(90);
+        t.setC(5);
 
         assertTrue(t.isComplete());
 

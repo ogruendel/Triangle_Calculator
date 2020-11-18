@@ -83,48 +83,48 @@ public class Triangle {
 
             } else if (alpha != null && beta != null && a != null) {
                 gamma = 180 - alpha - beta;
-                b = (Math.sin(beta) * a) / Math.sin(alpha);
-                c = (Math.sin(gamma) * a) / Math.sin(alpha);
+                b = (Math.sin(beta * toRad) * a) / Math.sin(alpha * toRad);
+                c = (Math.sin(gamma * toRad) * a) / Math.sin(alpha * toRad);
 
             } else if (alpha != null && beta != null && b != null) {
                 gamma = 180 - alpha - beta;
-                a = (Math.sin(alpha) * b) / Math.sin(beta);
-                c = (Math.sin(gamma) * b) / Math.sin(beta);
+                a = (Math.sin(alpha * toRad) * b) / Math.sin(beta * toRad);
+                c = (Math.sin(gamma * toRad) * b) / Math.sin(beta * toRad);
 
             } else if (alpha != null && beta != null && c != null) {
                 gamma = 180 - alpha - beta;
-                a = (Math.sin(alpha) * c) / Math.sin(gamma);
-                b = (Math.sin(beta) * c) / Math.sin(gamma);
+                a = (Math.sin(alpha * toRad) * c) / Math.sin(gamma * toRad);
+                b = (Math.sin(beta * toRad) * c) / Math.sin(gamma * toRad);
 
             } else if (alpha != null && gamma != null && a != null) {
                 beta = 180 - alpha - gamma;
-                b = (Math.sin(beta) * a) / Math.sin(alpha);
-                c = (Math.sin(gamma) * a) / Math.sin(alpha);
+                b = (Math.sin(beta * toRad) * a) / Math.sin(alpha * toRad);
+                c = (Math.sin(gamma * toRad) * a) / Math.sin(alpha * toRad);
 
             } else if (alpha != null && gamma != null && b != null) {
                 beta = 180 - alpha - gamma;
-                a = (Math.sin(alpha) / b) * Math.sin(beta);
-                c = (Math.sin(gamma) / b) * Math.sin(beta);
+                a = (Math.sin(alpha * toRad) * b) / Math.sin(beta * toRad);
+                c = (Math.sin(gamma * toRad) * b) / Math.sin(beta * toRad);
 
             } else if (alpha != null && gamma != null && c != null) {
                 beta = 180 - alpha - gamma;
-                a = (Math.sin(alpha) * c) / Math.sin(gamma);
-                b = (Math.sin(beta) * c) / Math.sin(gamma);
+                a = (Math.sin(alpha * toRad) * c) / Math.sin(gamma * toRad);
+                b = (Math.sin(beta * toRad) * c) / Math.sin(gamma * toRad);
 
             } else if (beta != null && gamma != null && a != null) {
                 alpha = 180 - beta - gamma;
-                b = (Math.sin(beta) * a) / Math.sin(alpha);
-                c = (Math.sin(gamma) * a) / Math.sin(alpha);
+                b = (Math.sin(beta * toRad) * a) / Math.sin(alpha * toRad);
+                c = (Math.sin(gamma * toRad) * a) / Math.sin(alpha * toRad);
 
             } else if (beta != null && gamma != null && b != null) {
                 alpha = 180 - beta - gamma;
-                a = (Math.sin(alpha) * b) / Math.sin(beta);
-                c = (Math.sin(gamma) * b) / Math.sin(beta);
+                a = (Math.sin(alpha * toRad) * b) / Math.sin(beta * toRad);
+                c = (Math.sin(gamma * toRad) * b) / Math.sin(beta * toRad);
 
             } else if (beta != null && gamma != null && c != null) {
                 alpha = 180 - beta - gamma;
-                a = (Math.sin(alpha) * c) / Math.sin(gamma);
-                b = (Math.sin(beta) * c) / Math.sin(gamma);
+                a = (Math.sin(alpha * toRad) * c) / Math.sin(gamma * toRad);
+                b = (Math.sin(beta * toRad) * c) / Math.sin(gamma * toRad);
 
             } else {
                 throw new IllegalStateException("This should not have happened");
