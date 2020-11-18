@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleTest {
@@ -18,61 +21,165 @@ class TriangleTest {
         Triangle t = new Triangle();
 
         t.setAlpha(90);
-        t.setA(6);
-        t.setB(3.5);
+        t.setA(5);
+        t.setB(4);
 
         assertTrue(t.isComplete());
 
-        assertEquals(35.68533471265206, t.getBeta());
-        assertEquals(54.31466528734794, t.getGamma());
-        assertEquals(4.873397172404482, t.getC());
+        assertEquals(90, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(36.87, round(t.getGamma(), 2));
+
+        assertEquals(5, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(3, round(t.getC(), 2));
+
     }
     @org.junit.jupiter.api.Test
     void alphaAC(){
         Triangle t = new Triangle();
+
+        t.setA(5);
+        t.setC(3);
+        t.setAlpha(90);
+
         assertTrue(t.isComplete());
+
+        assertEquals(90, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(36.87, round(t.getGamma(), 2));
+
+        assertEquals(5, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(3, round(t.getC(), 2));
 
     }
     @org.junit.jupiter.api.Test
     void alphaBC(){
         Triangle t = new Triangle();
+
+        t.setB(4);
+        t.setC(3);
+        t.setAlpha(90);
+
         assertTrue(t.isComplete());
-        assertEquals(t.getBeta() + t.getGamma(), 90);
+
+        assertEquals(90, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(36.87, round(t.getGamma(), 2));
+
+        assertEquals(5, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(3, round(t.getC(), 2));
     }
     @org.junit.jupiter.api.Test
     void betaAB(){
         Triangle t = new Triangle();
+
+        t.setA(3);
+        t.setB(5);
+        t.setBeta(90);
+
         assertTrue(t.isComplete());
+
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(90, round(t.getBeta(), 2));
+        assertEquals(53.13, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(5, round(t.getB(), 2));
+        assertEquals(4, round(t.getC(), 2));
 
     }
     @org.junit.jupiter.api.Test
     void betaAC(){
         Triangle t = new Triangle();
+
+        t.setA(3);
+        t.setC(4);
+        t.setBeta(90);
+
         assertTrue(t.isComplete());
-        assertEquals(t.getAlpha() + t.getGamma(), 90);
+
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(90, round(t.getBeta(), 2));
+        assertEquals(53.13, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(5, round(t.getB(), 2));
+        assertEquals(4, round(t.getC(), 2));
     }
     @org.junit.jupiter.api.Test
     void betaBC(){
         Triangle t = new Triangle();
+
+        t.setB(5);
+        t.setC(4);
+        t.setBeta(90);
+
         assertTrue(t.isComplete());
 
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(90, round(t.getBeta(), 2));
+        assertEquals(53.13, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(5, round(t.getB(), 2));
+        assertEquals(4, round(t.getC(), 2));
     }
     @org.junit.jupiter.api.Test
     void gammaAB(){
         Triangle t = new Triangle();
+
+        t.setA(3);
+        t.setB(4);
+        t.setGamma(90);
+
         assertTrue(t.isComplete());
-        assertEquals(t.getAlpha() + t.getBeta(), 90);
+
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(90, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(5, round(t.getC(), 2));
     }
     @org.junit.jupiter.api.Test
     void gammaAC(){
         Triangle t = new Triangle();
+
+        t.setA(3);
+        t.setC(5);
+        t.setGamma(90);
+
         assertTrue(t.isComplete());
 
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(90, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(5, round(t.getC(), 2));
     }
     @org.junit.jupiter.api.Test
     void gammaBC(){
         Triangle t = new Triangle();
+
+        t.setB(4);
+        t.setC(5);
+        t.setGamma(90);
+
         assertTrue(t.isComplete());
+
+        assertEquals(36.87, round(t.getAlpha(), 2));
+        assertEquals(53.13, round(t.getBeta(), 2));
+        assertEquals(90, round(t.getGamma(), 2));
+
+        assertEquals(3, round(t.getA(), 2));
+        assertEquals(4, round(t.getB(), 2));
+        assertEquals(5, round(t.getC(), 2));
 
     }
     @org.junit.jupiter.api.Test
@@ -119,5 +226,13 @@ class TriangleTest {
     void betaGammaC(){
         Triangle t = new Triangle();
         assertTrue(t.isComplete());
+    }
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

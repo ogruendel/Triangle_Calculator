@@ -77,11 +77,11 @@ public class Triangle {
             }else if(gamma != null && a != null && c != null){
                 alpha = Math.asin(a / c) * toDeg;
                 b = Math.cos(alpha * toRad) * c;
-                beta = Math.asin(a / c) * toDeg;
+                beta = Math.asin(b / c) * toDeg;
 
             }else if(gamma != null && b != null && c != null){
                 alpha = Math.acos(b / c) * toDeg;
-                a = Math.sin(alpha * toRad) * b;
+                a = Math.sin(alpha * toRad) * c;
                 beta = Math.asin(b / c) * toDeg;
 
             }else if(alpha != null && beta != null && a != null){
