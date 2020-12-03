@@ -36,14 +36,9 @@ public class Triangle {
                 throw new IllegalStateException("You cannot calculate a triangle with only 3 angles");
 
             } else if (a != null && b != null && c != null) {
-
-                double a1 = (b * b) + (c * c) - (a * a);
-                double b1 = (a * a) + (c * c) - (b * b);
-                double c1 = (a * a) + (b * b) - (c * c);
                 alpha = Math.acos(((b * b) + (c * c) - (a * a)) / (2 * b * c)) * toDeg;
                 beta = Math.acos(((a * a) + (c * c) - (b * b)) / (2 * a * c)) * toDeg;
                 gamma = Math.acos(((a * a) + (b * b) - (c * c)) / (2 * a * b)) * toDeg;
-
 
             } else if (alpha != null && a != null && b != null) {
                 beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
