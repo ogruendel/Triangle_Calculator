@@ -23,18 +23,27 @@ public class Triangle {
         if (c != null) nonNulls++;
 
         if (nonNulls == 3) {
+            /*
+         * For the cases, where there is a given angle and its opposing site, I am using the law of sines (https://en.wikipedia.org/wiki/Law_of_sines)
+         * to calculate one missing angle, then I use the Interior angle sum of a triangle (https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle)
+         * to calculate the missing angle, and then I use a rearranged form of the law of sines to calculate the missing site.
+         *
+         * For the cases, where there is not a given angle and its opposing site, I am using the law of cosines (https://en.wikipedia.org/wiki/Law_of_cosines)
+         * to calculate the missing site, and then I use a rearranged form of the law of sines to calculate a missing angle.
+         * After that its just the Interior angle sum of a triangle to get the remaining angle. */
+
             if (alpha != null && beta != null && gamma != null) {
                 throw new IllegalStateException("You cannot calculate a triangle with only 3 angles");
+
             } else if (a != null && b != null && c != null) {
 
-                /*
-                 * For the cases, where there is a given angle and its opposing site, I am using the law of sines (https://en.wikipedia.org/wiki/Law_of_sines)
-                 * to calculate one missing angle, then I use the Interior angle sum of a triangle (https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle)
-                 * to calculate the missing angle, and then I use a rearranged form of the law of sines to calculate the missing site.
-                 *
-                 * For the cases, where there is not a given angle and its opposing site, I am using the law of cosines (https://en.wikipedia.org/wiki/Law_of_cosines)
-                 * to calculate the missing site, and then I use a rearranged form of the law of sines to calculate a missing angle.
-                 * After that its just the Interior angle sum of a triangle to get the remaining angle. */
+                double a1 = (b * b) + (c * c) - (a * a);
+                double b1 = (a * a) + (c * c) - (b * b);
+                double c1 = (a * a) + (b * b) - (c * c);
+                alpha = Math.acos(((b * b) + (c * c) - (a * a)) / (2 * b * c)) * toDeg;
+                beta = Math.acos(((a * a) + (c * c) - (b * b)) / (2 * a * c)) * toDeg;
+                gamma = Math.acos(((a * a) + (b * b) - (c * c)) / (2 * a * b)) * toDeg;
+
 
             } else if (alpha != null && a != null && b != null) {
                 beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
