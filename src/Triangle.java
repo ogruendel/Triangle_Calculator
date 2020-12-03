@@ -2,10 +2,17 @@ public class Triangle {
     private Double alpha;
     private Double beta;
     private Double gamma;
+    private double alpha2;
+    private double beta2;
+    private double gamma2;
 
     private Double a;
     private Double b;
     private Double c;
+    private double a2;
+    private double b2;
+    private double c2;
+
 
     public final double toDeg = 180 / Math.PI;
     public final double toRad = Math.PI / 180;
@@ -35,6 +42,7 @@ public class Triangle {
             if (alpha != null && beta != null && gamma != null) {
                 throw new IllegalStateException("You cannot calculate a triangle with only 3 angles");
 
+                //TODO: Probably multiple possibilities for angles again
             } else if (a != null && b != null && c != null) {
                 alpha = Math.acos(((b * b) + (c * c) - (a * a)) / (2 * b * c)) * toDeg;
                 beta = Math.acos(((a * a) + (c * c) - (b * b)) / (2 * a * c)) * toDeg;
@@ -44,11 +52,21 @@ public class Triangle {
                 beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
                 gamma = 180 - alpha - beta;
                 c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
+                if ((180 - beta) + alpha >= 0) {
+                    beta2 = 180 - beta;
+                    gamma2 = 180 - alpha - beta2;
+                    c2 = (a * Math.sin(gamma2 * toRad) / Math.sin(alpha * toRad));
+                }
 
             } else if (alpha != null && a != null && c != null) {
                 gamma = Math.asin((c * Math.sin(alpha * toRad) / a)) * toDeg;
                 beta = 180 - alpha - gamma;
                 b = (a * Math.sin(beta * toRad) / Math.sin(alpha * toRad));
+                if((180 - gamma) + alpha >= 0){
+                    gamma2 = 180 - gamma;
+                    beta2 = 180 - alpha - gamma2;
+                    b2 = (a * Math.sin(beta2 * toRad) / Math.sin(alpha * toRad));
+                }
 
             } else if (alpha != null && b != null && c != null) {
                 a = Math.sqrt(b * b + c * c - 2 * b * c * Math.cos(alpha * toRad));
@@ -59,6 +77,11 @@ public class Triangle {
                 alpha = Math.asin((a * Math.sin(beta * toRad) / b)) * toDeg;
                 gamma = 180 - alpha - beta;
                 c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
+                if((180 - alpha) + beta >= 0){
+                    alpha2 = 180 - alpha;
+                    gamma2 = 180 - alpha2 - beta;
+                    c2 = (a * Math.sin(gamma2 * toRad) / Math.sin(alpha2 * toRad));
+                }
 
             } else if (beta != null && a != null && c != null) {
                 b = Math.sqrt(a * a + c * c - 2 * a * c * Math.cos(beta * toRad));
@@ -69,6 +92,11 @@ public class Triangle {
                 gamma = Math.asin((c * Math.sin(beta * toRad) / b)) * toDeg;
                 alpha = 180 - beta - gamma;
                 a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
+                if ((180 - gamma) + beta >= 0) {
+                    gamma2 = 180 - gamma;
+                    alpha2 = 180 - beta - gamma2;
+                    a2 = (c * Math.sin(alpha2 * toRad) / Math.sin(gamma2 * toRad));
+                }
 
             } else if (gamma != null && a != null && b != null) {
                 c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(gamma * toRad));
@@ -79,11 +107,21 @@ public class Triangle {
                 alpha = Math.asin((a * Math.sin(gamma * toRad) / c)) * toDeg;
                 beta = 180 - alpha - gamma;
                 b = (c * Math.sin(beta * toRad) / Math.sin(gamma * toRad));
+                if((180 - alpha) + gamma >= 0) {
+                    alpha2 = 180 - alpha;
+                    beta2 = 180 - gamma - alpha2;
+                    b2 = (c * Math.sin(beta2 * toRad) / Math.sin(gamma * toRad));
+                }
 
             } else if (gamma != null && b != null && c != null) {
                 beta = Math.asin((b * Math.sin(gamma * toRad) / c)) * toDeg;
                 alpha = 180 - beta - gamma;
                 a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
+                if((180 - beta) + gamma >= 0) {
+                    beta2 = 180 - beta;
+                    alpha2 = 180 - beta2 - gamma;
+                    a2 = (c * Math.sin(alpha2 * toRad) / Math.sin(gamma * toRad));
+                }
 
             } else if (alpha != null && beta != null && a != null) {
                 gamma = 180 - alpha - beta;
@@ -191,7 +229,36 @@ public class Triangle {
         calcState();
     }
 
+    public double getAlpha2() {
+        return alpha2;
+    }
+
+    public double getBeta2() {
+        return beta2;
+    }
+
+    public double getGamma2() {
+        return gamma2;
+    }
+
+    public double getA2() {
+        return a2;
+    }
+
+    public double getB2() {
+        return b2;
+    }
+
+    public double getC2() {
+        return c2;
+    }
+
     public boolean isComplete() {
         return isComplete;
     }
 }
+
+/*
+My classmate Justin said to me, that if I become famous I should say something about him, so I told him,
+I'd include his name in the code via comment. So here it is. What's up Justin.
+s*/
