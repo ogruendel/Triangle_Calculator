@@ -24,13 +24,13 @@ public class Triangle {
 
         if (nonNulls == 3) {
             /*
-         * For the cases, where there is a given angle and its opposing site, I am using the law of sines (https://en.wikipedia.org/wiki/Law_of_sines)
-         * to calculate one missing angle, then I use the Interior angle sum of a triangle (https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle)
-         * to calculate the missing angle, and then I use a rearranged form of the law of sines to calculate the missing site.
-         *
-         * For the cases, where there is not a given angle and its opposing site, I am using the law of cosines (https://en.wikipedia.org/wiki/Law_of_cosines)
-         * to calculate the missing site, and then I use a rearranged form of the law of sines to calculate a missing angle.
-         * After that its just the Interior angle sum of a triangle to get the remaining angle. */
+             * For the cases, where there is a given angle and its opposing site, I am using the law of sines (https://en.wikipedia.org/wiki/Law_of_sines)
+             * to calculate one missing angle, then I use the Interior angle sum of a triangle (https://en.wikipedia.org/wiki/Sum_of_angles_of_a_triangle)
+             * to calculate the missing angle, and then I use a rearranged form of the law of sines to calculate the missing site.
+             *
+             * For the cases, where there is not a given angle and its opposing site, I am using the law of cosines (https://en.wikipedia.org/wiki/Law_of_cosines)
+             * to calculate the missing site, and then I use a rearranged form of the law of sines to calculate a missing angle.
+             * After that its just the Interior angle sum of a triangle to get the remaining angle. */
 
             if (alpha != null && beta != null && gamma != null) {
                 throw new IllegalStateException("You cannot calculate a triangle with only 3 angles");
@@ -136,7 +136,6 @@ public class Triangle {
             isComplete = true;
         }
     }
-
 
     public double getAlpha() {
         return alpha;
