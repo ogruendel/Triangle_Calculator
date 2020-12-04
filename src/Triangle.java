@@ -52,7 +52,7 @@ public class Triangle {
                 beta = Math.asin((b * Math.sin(alpha * toRad) / a)) * toDeg;
                 gamma = 180 - alpha - beta;
                 c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
-                if ((180 - beta) + alpha >= 0) {
+                if ((180 - beta) + alpha < 180) {
                     beta2 = 180 - beta;
                     gamma2 = 180 - alpha - beta2;
                     c2 = (a * Math.sin(gamma2 * toRad) / Math.sin(alpha * toRad));
@@ -62,7 +62,7 @@ public class Triangle {
                 gamma = Math.asin((c * Math.sin(alpha * toRad) / a)) * toDeg;
                 beta = 180 - alpha - gamma;
                 b = (a * Math.sin(beta * toRad) / Math.sin(alpha * toRad));
-                if((180 - gamma) + alpha >= 0){
+                if((180 - gamma) + alpha < 180){
                     gamma2 = 180 - gamma;
                     beta2 = 180 - alpha - gamma2;
                     b2 = (a * Math.sin(beta2 * toRad) / Math.sin(alpha * toRad));
@@ -77,7 +77,7 @@ public class Triangle {
                 alpha = Math.asin((a * Math.sin(beta * toRad) / b)) * toDeg;
                 gamma = 180 - alpha - beta;
                 c = (a * Math.sin(gamma * toRad) / Math.sin(alpha * toRad));
-                if((180 - alpha) + beta >= 0){
+                if((180 - alpha) + beta < 180){
                     alpha2 = 180 - alpha;
                     gamma2 = 180 - alpha2 - beta;
                     c2 = (a * Math.sin(gamma2 * toRad) / Math.sin(alpha2 * toRad));
@@ -92,7 +92,7 @@ public class Triangle {
                 gamma = Math.asin((c * Math.sin(beta * toRad) / b)) * toDeg;
                 alpha = 180 - beta - gamma;
                 a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
-                if ((180 - gamma) + beta >= 0) {
+                if ((180 - gamma) + beta < 180) {
                     gamma2 = 180 - gamma;
                     alpha2 = 180 - beta - gamma2;
                     a2 = (c * Math.sin(alpha2 * toRad) / Math.sin(gamma2 * toRad));
@@ -107,7 +107,7 @@ public class Triangle {
                 alpha = Math.asin((a * Math.sin(gamma * toRad) / c)) * toDeg;
                 beta = 180 - alpha - gamma;
                 b = (c * Math.sin(beta * toRad) / Math.sin(gamma * toRad));
-                if((180 - alpha) + gamma >= 0) {
+                if((180 - alpha) + gamma < 180) {
                     alpha2 = 180 - alpha;
                     beta2 = 180 - gamma - alpha2;
                     b2 = (c * Math.sin(beta2 * toRad) / Math.sin(gamma * toRad));
@@ -117,7 +117,7 @@ public class Triangle {
                 beta = Math.asin((b * Math.sin(gamma * toRad) / c)) * toDeg;
                 alpha = 180 - beta - gamma;
                 a = (c * Math.sin(alpha * toRad) / Math.sin(gamma * toRad));
-                if((180 - beta) + gamma >= 0) {
+                if((180 - beta) + gamma < 180) {
                     beta2 = 180 - beta;
                     alpha2 = 180 - beta2 - gamma;
                     a2 = (c * Math.sin(alpha2 * toRad) / Math.sin(gamma * toRad));
