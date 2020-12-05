@@ -172,6 +172,17 @@ public class Triangle {
                 throw new IllegalStateException("This should not have happened");
             }
             isComplete = true;
+
+            if(a2 == 0.0 && b2 == 0.0 && c2 == 0.0 && alpha2 == 0.0 && beta2 == 0.0 && gamma2 == 0.0) return;
+            else {
+                if (a2 == 0.0) a2 = getA();
+                if (b2 == 0.0) b2 = getB();
+                if (c2 == 0.0) c2 = getC();
+
+                if (alpha2 == 0.0) alpha2 = getAlpha();
+                if (beta2 == 0.0) beta2 = getBeta();
+                if (gamma2 == 0.0) gamma2 = getGamma();
+            }
         }
     }
 
@@ -257,6 +268,7 @@ public class Triangle {
         return isComplete;
     }
 }
+
 
 /*
 My classmate Justin said to me, that if I become famous I should say something about him, so I told him,
